@@ -53,7 +53,7 @@ def Aists():
         print("wrong quantity aists")
 
 
-def ChokolateCut():
+def ChocolateCut():
     print("input size chocolate N x M : ")
     n = getNumericFromConsole("input N: ")
     m = getNumericFromConsole("input M: ")
@@ -75,7 +75,7 @@ def ExserciseSelect():
         elif num == 6:
             LuckyTicket()
         elif num == 8:
-            ChokolateCut()
+            ChocolateCut()
         elif num == 0:
             break
         else:
