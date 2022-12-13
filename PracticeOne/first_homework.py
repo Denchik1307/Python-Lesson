@@ -55,8 +55,8 @@ def Aists():
 
 def ChokolateCut():
     print("input size chocolate N x M : ")
-    n = getNumericFromConsole("inut N: ")
-    m = getNumericFromConsole("inut M: ")
+    n = getNumericFromConsole("input N: ")
+    m = getNumericFromConsole("input M: ")
     k = getNumericFromConsole("input K: ")
     if k < n * m and (k % n == 0 or k % m == 0):
         print("Yes")
