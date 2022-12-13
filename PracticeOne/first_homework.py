@@ -58,23 +58,28 @@ def ChokolateCut():
     n = getNumericFromConsole("inut N: ")
     m = getNumericFromConsole("inut M: ")
     k = getNumericFromConsole("input K: ")
-    if k % n or k % m:
+    if k < n * m and (k % n == 0 or k % m == 0):
         print("Yes")
     else:
         print("No")
 
 
-def ExserciseSelect(num):
-    if num == 2:
-        SummDigitNum()
-    elif num == 4:
-        Aists()
-    elif num == 6:
-        LuckyTicket()
-    elif num == 8:
-        ChokolateCut()
-    else:
-        print("input error")
+def ExserciseSelect():
+    while True:
+        num = getNumericFromConsole(
+            "input number exercise (2,4,6 or 8) or 0 to exit: ")
+        if num == 2:
+            SummDigitNum()
+        elif num == 4:
+            Aists()
+        elif num == 6:
+            LuckyTicket()
+        elif num == 8:
+            ChokolateCut()
+        elif num == 0:
+            break
+        else:
+            print("input error")
 
 
-ExserciseSelect(getNumericFromConsole("input number exercise (2,4,6 or 8)"))
+ExserciseSelect()
