@@ -42,7 +42,7 @@ def Degrees():
     res = []
     tmp = 2
 
-    while tmp < num:
+    while tmp <= num:
         res.append(tmp)
         tmp <<= 1
     print(sorted(res))
