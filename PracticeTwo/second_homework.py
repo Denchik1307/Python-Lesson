@@ -15,11 +15,12 @@ def getNumericFromConsole(text=""):
 
 def GuessTheNumber():
     summ = getNumericFromConsole("enter the sum of the hidden numbers: ")
-    mult = getNumericFromConsole("enter the multiplication of the hidden numbers: ")
+    mult = getNumericFromConsole(
+        "enter the multiplication of the hidden numbers: ")
     ran = range(0, 1001)
     list = []
     isFind = False
-    
+
     for i in ran:
         if isFind:
             break
@@ -28,10 +29,10 @@ def GuessTheNumber():
                 list.append(i)
                 list.append(j)
                 isFind = True
-                
+
     if len(list) < 1:
         list.append("something's wrong")
-        
+
     print(list)
 
 
@@ -39,7 +40,7 @@ def Degrees():
     num = getNumericFromConsole("enter a number: ")
     res = []
     tmp = 2
-    
+
     while tmp < num:
         res.append(tmp)
         tmp <<= 1
@@ -47,26 +48,33 @@ def Degrees():
 
 
 def Money():
-    n = getNumericFromConsole("enter the number of coins on the table: ")
+    n=0
+    while n < 1:
+        n = getNumericFromConsole("enter the number of coins on the table: ")
+        if n<2:print("need <0")
+
 
     list = []
 
     for i in range(0, n):
-        list.append("heads" if randint(0, 1) == 1 else "tail")
+        list.append("head" if randint(0, 1) == 1 else "tail")
 
     print(list)
     count = 0
 
     for item in list:
-        if item == "heads":
+        if item == "head":
             count += 1
-
-    if count > n >> 1:
+            
+    if len(list) == 1 or count == len(list) or count == 0:
+        print("turn nothing")
+    elif count > n >> 1:
         print("turn tail")
-    elif count < n >> 1:
+    elif count < n+1 >> 1:
         print("turn heads")
     else:
-        print("turn any (tail or heads)")
+        print("turn any (tails or heads)")
+    print(count,len(list))
 
 
 def ExserciseSelect():
