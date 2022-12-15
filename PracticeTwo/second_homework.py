@@ -77,7 +77,6 @@ def Money():
         print("turn", tunsCount, "heads" if tunsCount>1 else "head")
     else:
         print("turn any (tails or heads)")
-    print(count, len(list))
 
 
 def ExserciseSelect():
