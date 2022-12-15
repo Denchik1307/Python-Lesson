@@ -32,8 +32,7 @@ def GuessTheNumber():
                 break
 
     if len(list) < 1:
-        list.append("something's wrong! it's impossible")
-        print(list)
+        print("something's wrong! it's impossible")
     else:
         print("hidden numbers is",list)
 
