@@ -66,13 +66,15 @@ def Money():
     for item in list:
         if item == "head":
             count += 1
-
+            
+    tunsCount = len(list) - count if count > len(list)>>1 else count
+    
     if len(list) == 1 or count == len(list) or count == 0:
         print("turn nothing")
     elif count > n >> 1:
-        print("turn tail")
+        print("turn", tunsCount, "tails" if tunsCount>1 else "tail")
     elif count < n+1 >> 1:
-        print("turn heads")
+        print("turn", tunsCount, "heads" if tunsCount>1 else "head")
     else:
         print("turn any (tails or heads)")
     print(count, len(list))
