@@ -33,8 +33,9 @@ def GuessTheNumber():
 
     if len(list) < 1:
         list.append("something's wrong! it's impossible")
-
-    print("hidden numbers is",list)
+        print(list)
+    else:
+        print("hidden numbers is",list)
 
 
 def Degrees():
@@ -45,7 +46,7 @@ def Degrees():
     while tmp < num:
         res.append(tmp)
         tmp <<= 1
-    print(res)
+    print(sorted(res))
 
 
 def Money():
