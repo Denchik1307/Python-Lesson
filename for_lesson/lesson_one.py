@@ -1,3 +1,4 @@
+import calendar
 import os
 os.system('cls' if os.name == 'nt' else 'clear')
 
@@ -7,7 +8,7 @@ def Distance():
     result = (m + n - 1) // n
     print(result)
 
-Distance()
+# Distance()
 
 def CountTable():
     classA = int(input("Кол-во учеников класса A"))
@@ -16,7 +17,7 @@ def CountTable():
     result = (classA + classB + classC + 1) // 2
     print(result)
 
-CountTable()
+# CountTable()
 
 def Locomotive():
     i = int(input("порядковый номер вагона: "))
@@ -24,14 +25,18 @@ def Locomotive():
     result = i + j - 1
     print(result, "вагонов")
 
-Locomotive()
+# Locomotive()
 
-def IsHighYear():
-    i = int(input("Введите год: "))
-    if (i % 4 == 0 and i % 100 != 0) or (i % 400 == 0):
+def IsLeapYear():
+    year = int(input("Введите год: "))
+    if year % 4 == 0 and (year % 100 != 0 or year % 400 == 0):
         print('YES')
     else:
         print('NO')
+        
+# IsLeapYear()
 
-IsHighYear()
+def IsLeapYearTwo():
+    print("Yes" if calendar.isleap(int(input("input year: "))) else "No")
 
+IsLeapYearTwo()
