@@ -34,7 +34,7 @@ def GuessTheNumber():
     if len(list) < 1:
         list.append("something's wrong")
 
-    print(list)
+    print("hidden numbers is",list)
 
 
 def Degrees():
