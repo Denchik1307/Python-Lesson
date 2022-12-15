@@ -29,6 +29,7 @@ def GuessTheNumber():
                 list.append(i)
                 list.append(j)
                 isFind = True
+                break
 
     if len(list) < 1:
         list.append("something's wrong")
