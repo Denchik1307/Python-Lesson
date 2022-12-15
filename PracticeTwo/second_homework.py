@@ -48,11 +48,11 @@ def Degrees():
 
 
 def Money():
-    n=0
+    n = 0
     while n < 1:
         n = getNumericFromConsole("enter the number of coins on the table: ")
-        if n<2:print("need <0")
-
+        if n < 2:
+            print("need <0")
 
     list = []
 
@@ -65,7 +65,7 @@ def Money():
     for item in list:
         if item == "head":
             count += 1
-            
+
     if len(list) == 1 or count == len(list) or count == 0:
         print("turn nothing")
     elif count > n >> 1:
@@ -74,7 +74,7 @@ def Money():
         print("turn heads")
     else:
         print("turn any (tails or heads)")
-    print(count,len(list))
+    print(count, len(list))
 
 
 def ExserciseSelect():
