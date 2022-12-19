@@ -53,7 +53,7 @@ def Scrabble():
     print(count)
 
 
-def FindNum():
+def FindNearDigit():
     arrSize = getNumericFromConsole("Input size arr: ")
     arr = ArrayRandom(arrSize, rangeMin=1, rangeMax=arrSize >> 1)
     arr = sorted(arr)
@@ -72,11 +72,11 @@ def FindNum():
 def ExserciseSelect():
     while True:
         num = getNumericFromConsole(
-            "input number exercise (16, 18 or 20) or 0 to exit: ")
+            "16 CountNumber\n18 FindNearDigit\n20 Scrabble\nInput number exercise (16, 18 or 20) or 0 to exit: ")
         if num == 16:
             CountNumber()
         elif num == 18:
-            FindNum()
+            FindNearDigit()
         elif num == 20:
             Scrabble()
         elif num == 0:
