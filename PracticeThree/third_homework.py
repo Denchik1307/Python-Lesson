@@ -13,16 +13,16 @@ def getNumericFromConsole(text=""):
     return res
 
 
-def ArrayRandom(n: int, ran: int = 100):
+def ArrayRandom(n: int, rangeMin: int = 0, rangeMax: int = 100):
     resArr = []
     for i in range(n):
-        resArr.append(randint(0,ran))
+        resArr.append(randint(rangeMin, rangeMax))
     return resArr
 
 
 def CountNumber():
     arrSize = getNumericFromConsole("Input size arr: ")
-    arr = ArrayRandom(arrSize,arrSize//2)
+    arr = ArrayRandom(arrSize, rangeMin=1, rangeMax=arrSize//2)
     arr = sorted(arr)
     num = getNumericFromConsole("input number for count repit digit: ")
     count = 0
@@ -59,7 +59,7 @@ def FindNum():
         if i > num:
             max = i
             break
-    print(arr,max-num,num-min)
+    print(arr, max-num, num-min)
     print(min if num-min <= max - num else max)
 
 
