@@ -38,13 +38,13 @@ def CountNumber():
 def Scrabble():
     word = input("Input your word: ")
     lib = \
-    {"AEIOULNSTRАВЕИНОРСТ": 1,
-    "DGДКЛМПУ": 2,
-    "BCMPБГЁЬЯ": 3,
-    "FHVWYЙЫ": 4,
-    "KЖЗХЦЧ": 5,
-    "JXШЭЮ": 8,
-    "QZФЩЪ": 10}
+        {"AEIOULNSTRАВЕИНОРСТ": 1,
+         "DGДКЛМПУ": 2,
+         "BCMPБГЁЬЯ": 3,
+         "FHVWYЙЫ": 4,
+         "KЖЗХЦЧ": 5,
+         "JXШЭЮ": 8,
+         "QZФЩЪ": 10}
     count = 0
     for i in word:
         for val, key in enumerate(lib.keys()):
@@ -55,7 +55,7 @@ def Scrabble():
 
 def FindNum():
     arrSize = getNumericFromConsole("Input size arr: ")
-    arr = ArrayRandom(arrSize)
+    arr = ArrayRandom(arrSize, rangeMin=1, rangeMax=arrSize//2)
     arr = sorted(arr)
     num = getNumericFromConsole("input number for find near digit: ")
     max = min = 0
