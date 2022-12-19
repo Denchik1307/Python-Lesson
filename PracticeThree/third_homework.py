@@ -22,7 +22,7 @@ def ArrayRandom(n: int, rangeMin: int = 0, rangeMax: int = 100):
 
 def CountNumber():
     arrSize = getNumericFromConsole("Input size arr: ")
-    arr = ArrayRandom(arrSize, rangeMin=1, rangeMax=arrSize//2)
+    arr = ArrayRandom(arrSize, rangeMin=1, rangeMax=arrSize>>1)
     arr = sorted(arr)
     num = getNumericFromConsole("input number for count repit digit: ")
     count = 0
@@ -55,7 +55,7 @@ def Scrabble():
 
 def FindNum():
     arrSize = getNumericFromConsole("Input size arr: ")
-    arr = ArrayRandom(arrSize, rangeMin=1, rangeMax=arrSize//2)
+    arr = ArrayRandom(arrSize, rangeMin=1, rangeMax=arrSize>>1)
     arr = sorted(arr)
     num = getNumericFromConsole("input number for find near digit: ")
     max = min = 0
