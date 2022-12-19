@@ -66,7 +66,7 @@ def FindNum():
             max = i
             break
     print(arr, max-num, num-min)
-    print(min if num-min <= max - num and max != 0 else max)
+    print(min if num-min <= max - num or max == 0 else max)
 
 
 def ExserciseSelect():
