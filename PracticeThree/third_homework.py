@@ -1,6 +1,8 @@
 import os
 from random import randint
-os.system('cls')
+
+def Clear():
+    os.system('cls')
 
 
 def getNumericFromConsole(text=""):
@@ -21,6 +23,7 @@ def ArrayRandom(n: int, rangeMin: int = 0, rangeMax: int = 100):
 
 
 def CountNumber():
+    Clear()
     arrSize = getNumericFromConsole("Input size arr: ")
     arr = ArrayRandom(arrSize, rangeMin=1, rangeMax=arrSize >> 1)
     arr = sorted(arr)
@@ -31,12 +34,21 @@ def CountNumber():
             count += 1
         if num < i:
             break
+    Clear()
     print(arr)
     print(count)
 
 
 def Scrabble():
+    Clear()
     word = input("Input your word: ")
+    isEn = isRu = True
+    for letterEn  in word:
+        if 64 < ord(letterEn.upper()) < 91:
+            isEn = False
+    for letterRu  in word:
+        if 1039 < ord(letterRu.upper()) < 1072:
+            isRu = False
     lib = \
         {"AEIOULNSTRАВЕИНОРСТ": 1,
          "DGДКЛМПУ": 2,
@@ -46,14 +58,18 @@ def Scrabble():
          "JXШЭЮ": 8,
          "QZФЩЪ": 10}
     count = 0
-    for i in word:
-        for val, key in enumerate(lib.keys()):
-            if str(i).upper() in key:
-                count += lib[key]
-    print(count)
-
+    Clear()
+    if isEn or isRu:
+        for i in word:
+            for val, key in enumerate(lib.keys()):
+                if str(i).upper() in key:
+                    count += lib[key]
+        print(count,"points ", "(En)" if not isEn else "(Ru)")
+    else:
+        print("Wrong word (check input)")
 
 def FindNearDigit():
+    Clear()
     arrSize = getNumericFromConsole("Input size arr: ")
     arr = ArrayRandom(arrSize, rangeMin=1, rangeMax=arrSize >> 1)
     arr = sorted(arr)
@@ -65,14 +81,15 @@ def FindNearDigit():
         if i > num:
             max = i
             break
-    print(arr, max-num, num-min)
+    Clear()
+    print(arr)
     print(min if num-min <= max - num or max == 0 else max)
 
 
 def ExserciseSelect():
     while True:
         num = getNumericFromConsole(
-            "16 CountNumber\n18 FindNearDigit\n20 Scrabble\nInput number exercise (16, 18 or 20) or 0 to exit: ")
+            "\n16 CountNumber\n18 FindNearDigit\n20 Scrabble\nInput number exercise (16, 18 or 20) or 0 to exit: ")
         if num == 16:
             CountNumber()
         elif num == 18:
