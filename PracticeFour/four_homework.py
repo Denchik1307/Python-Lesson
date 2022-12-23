@@ -57,7 +57,7 @@ def GetDublicatesInLists():
             res.append(item)
     if len(res) == 0:
         res.append("nothing")
-    print(res)
+    print("Dubicates numbers -> ",res)
     EndExercise()
 
 
