@@ -1,7 +1,7 @@
 import os
 from random import randint
 
-def Clear():
+def EndExercise():
     input("press enter to continue")
     os.system('cls')
 
@@ -40,7 +40,7 @@ def GardenBed():
             res = tmp
             index = i
     print("Maximum",res, "berries on bushs №", index-1, index, index+1)
-    Clear()
+    EndExercise()
 
 
 
@@ -58,7 +58,7 @@ def GetDublicatesInLists():
     if len(res) == 0:
         res.append("nothing")
     print(res)
-    Clear()
+    EndExercise()
 
 
 def ExserciseSelect():
