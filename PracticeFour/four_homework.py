@@ -1,6 +1,9 @@
 import os
 from random import randint
-os.system('cls')
+
+def Clear():
+    _ = input("press enter to continue")
+    os.system('cls')
 
 
 def GetNumericFromConsole(text=""):
@@ -17,10 +20,11 @@ def GetNumericFromConsole(text=""):
     return res
 
 
-def CreateRandomList(min, max, size) -> list: [randint(min, max+1) for x in range(size)]
+def CreateRandomList(min, max, size):
+    return [randint(min, max+1) for x in range(size)]
 
 
-def Gryadka():
+def GardenBed():
     pcs = GetNumericFromConsole("Input pcs: ")
     bushes = CreateRandomList(20, 50, pcs)
     print(bushes)
@@ -35,14 +39,16 @@ def Gryadka():
         if tmp > res:
             res = tmp
             index = i
-    print(res, "berries on bushs №", index-1, index, index+1)
+    print("Maximum",res, "berries on bushs №", index-1, index, index+1)
+    Clear()
 
 
-def Money():
+
+def GetDublicatesInLists():
     sizeOne = GetNumericFromConsole("Input pcs: ")
     sizeTwo = GetNumericFromConsole("Input pcs: ")
-    arr1 = CreateRandomList(0, 50, sizeOne)
-    arr2 = CreateRandomList(0, 50, sizeTwo)
+    arr1: list[int] = CreateRandomList(0, 50, sizeOne)
+    arr2: list[int] = CreateRandomList(0, 50, sizeTwo)
     print(sorted(arr1))
     print(sorted(arr2))
     res = []
@@ -52,6 +58,7 @@ def Money():
     if len(res) == 0:
         res.append("nothing")
     print(res)
+    Clear()
 
 
 def ExserciseSelect():
@@ -59,9 +66,9 @@ def ExserciseSelect():
         num = GetNumericFromConsole(
             "input number exercise (22 or 24) or 0 to exit: ")
         if num == 22:
-            Money()
+            GetDublicatesInLists()
         elif num == 24:
-            Gryadka()
+            GardenBed()
         elif num == 0:
             break
         else:
