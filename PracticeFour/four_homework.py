@@ -46,7 +46,7 @@ def GardenBed():
 
 def GetDublicatesInLists():
     sizeOne = GetNumericFromConsole("Input size list one (pcs): ")
-    sizeTwo = GetNumericFromConsole("Input sixe list two (pcs): ")
+    sizeTwo = GetNumericFromConsole("Input size list two (pcs): ")
     arr1: list[int] = CreateRandomList(0, 50, sizeOne)
     arr2: list[int] = CreateRandomList(0, 50, sizeTwo)
     print(sorted(arr1))
