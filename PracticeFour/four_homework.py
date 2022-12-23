@@ -1,7 +1,6 @@
 import os
 from random import randint
-# import emojize
-os.system('cls' if os.name == 'nt' else 'clear')
+os.system('cls')
 
 
 def GetNumericFromConsole(text=""):
@@ -9,7 +8,7 @@ def GetNumericFromConsole(text=""):
     while res < 0:
         try:
             res = int(input(text))
-            if res<0:
+            if res < 0:
                 print("need number >= 0")
             else:
                 break
@@ -18,9 +17,12 @@ def GetNumericFromConsole(text=""):
     return res
 
 
+def CreateRandomList(min, max, size) -> list: [randint(min, max+1) for x in range(size)]
+
+
 def Gryadka():
     pcs = GetNumericFromConsole("Input pcs: ")
-    bushes = [randint(50, 200) for x in range(pcs)]
+    bushes = CreateRandomList(20, 50, pcs)
     print(bushes)
     res = 0
     index = 0
@@ -39,15 +41,15 @@ def Gryadka():
 def Money():
     sizeOne = GetNumericFromConsole("Input pcs: ")
     sizeTwo = GetNumericFromConsole("Input pcs: ")
-    arr1 = [randint(0,50) for x in range(sizeOne)]
-    arr2 = [randint(0,50) for x in range(sizeTwo)]
+    arr1 = CreateRandomList(0, 50, sizeOne)
+    arr2 = CreateRandomList(0, 50, sizeTwo)
     print(sorted(arr1))
     print(sorted(arr2))
     res = []
     for item in set(arr2):
         if item in set(arr1):
             res.append(item)
-    if len(res)==0:
+    if len(res) == 0:
         res.append("nothing")
     print(res)
 
