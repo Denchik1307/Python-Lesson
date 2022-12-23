@@ -2,7 +2,7 @@ import os
 from random import randint
 
 def EndExercise():
-    input("press enter to continue")
+    input("\npress enter to continue")
     os.system('cls')
 
 
