@@ -2,7 +2,7 @@ import os
 from random import randint
 
 def Clear():
-    _ = input("press enter to continue")
+    input("press enter to continue")
     os.system('cls')
 
 
