@@ -1,6 +1,7 @@
 import os
 from random import randint
 
+
 def EndExercise():
     input("\npress enter to continue")
     os.system('cls')
@@ -39,9 +40,8 @@ def GardenBed():
         if tmp > res:
             res = tmp
             index = i
-    print("Maximum",res, "berries on bushs №", index-1, index, index+1)
+    print("Maximum", res, "berries on bushs №", index-1, index, index+1)
     EndExercise()
-
 
 
 def GetDublicatesInLists():
@@ -57,7 +57,7 @@ def GetDublicatesInLists():
             res.append(item)
     if len(res) == 0:
         res.append("nothing")
-    print("Dubicates numbers -> ",res)
+    print("Dubicates numbers -> ", res)
     EndExercise()
 
 
