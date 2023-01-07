@@ -1,0 +1,7 @@
+*.xml
+*.iml
+*vscode
+*.gitignore
+*txt
+for_test/*
+*.dic

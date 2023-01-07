@@ -4,7 +4,6 @@ import sys
 from random import randint
 
 
-
 def clear() -> None:
     os.system('cls')
 
@@ -40,11 +39,11 @@ def get_numeric_from_console(text="") -> int:
 
 
 def create_random_list(minimal: int, maximal: int, size: int) -> list[int]:
-    return [randint(minimal, maximal + 1) for _ in range(size)]
+    return [randint(minimal, maximal) for _ in range(size)]
 
 
 def is_prime(num) -> bool:
-    for i in range(2, num >> 1):
+    for i in range(2, int(num**0.5)+1):
         if num % i == 0:
             return False
     return True
@@ -79,7 +78,7 @@ def exercise103() -> None:
         for i in list_num:
             tmp: str = str(i) if 1 != i != 0 else ""
             if size_list > 1:
-                result += f"{tmp}x**{size_list} + "
+                result += f"{tmp}x^{size_list} + "
             elif size_list == 1:
                 result += f"{tmp}x + "
             elif size_list == 0:
@@ -92,8 +91,17 @@ def exercise103() -> None:
         result += " = 0"
         return result
 
-    coefficient_one: int = get_positive_numeric_from_console("Input coefficient for file one: ")
-    coefficient_two: int = get_positive_numeric_from_console("Input coefficient for file two: ")
+    def get_coefficient(msg: str) -> int():
+        while True:
+            res = get_positive_numeric_from_console(msg)
+            if 6 > res > 1:
+                return res
+            else:
+                clear()
+                print("need input 2-5")
+
+    coefficient_one: int = get_coefficient("Input coefficient for file one: ")
+    coefficient_two: int = get_coefficient("Input coefficient for file two: ")
 
     write_file("104_file1.txt", make_formula(coefficient_one))
     write_file("104_file2.txt", make_formula(coefficient_two))
@@ -110,8 +118,8 @@ def exercise104() -> None:
 
         res_dict: dict = {}
         for i in poly_replaced:
-            if "x**" in i:
-                res_dict[i[i.find("x") + 3]] = i[:i.find("*") - 1]
+            if "x^" in i:
+                res_dict[i[i.find("x") + 2]] = i[:i.find("^") - 1]
             elif "x" in i:
                 res_dict[1] = i[:i.find("x")]
             elif "x" not in i:
@@ -120,16 +128,20 @@ def exercise104() -> None:
 
     dic_one: dict = fun_to_dict('104_file1.txt')
     dic_two: dict = fun_to_dict('104_file2.txt')
+
     res: str = ""
+    if len(dic_two) > len(dic_one):
+        dic_one, dic_two = dic_two, dic_one
+
     for key in dic_one:
         try:
             tmp: str = dic_two[key]
-        except IndexError as e:
-            print(e)
+        except:
+            # print(e)
             tmp: str = "0"
 
         summa: int = int(dic_one[key]) - int(tmp)
-        deg: str = f"x**{key}" if int(key) >= 2 else "x" if int(key) == 1 else ""
+        deg: str = f"x^{key}" if int(key) >= 2 else "x" if int(key) == 1 else ""
         plus_or_minus: str = " + " if summa >= 0 else " - "
         summa = summa if summa > 0 else summa * -1
         res += f"{plus_or_minus}{summa}{deg}"
@@ -240,7 +252,7 @@ def exercise_select() -> None:
             exercise107()
         elif num == 108:
             exercise108()
-        elif num == 1:
+        elif num == 1:   # hidden fun for another test
             test()
         elif num == 0:
             break
