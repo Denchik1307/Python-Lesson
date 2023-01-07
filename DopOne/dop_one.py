@@ -1,10 +1,12 @@
 import math
-import click
 import os
+import sys
 from random import randint
 
 
-def clear() -> None: os.system('cls')
+
+def clear() -> None:
+    os.system('cls')
 
 
 def end_exercise() -> None:
@@ -49,9 +51,9 @@ def is_prime(num) -> bool:
 
 
 def exercise101() -> None:
-    num = 0.001
-    pi = math.pi
-    tmp = str(num).split(".")
+    num: float = 0.001
+    pi: float = math.pi
+    tmp: list[str] = str(num).split(".")
     print(round(pi, len(tmp[1])))
     end_exercise()
 
@@ -71,11 +73,11 @@ def exercise102() -> None:
 
 def exercise103() -> None:
     def make_formula(coefficient: int) -> str:
-        list_num = create_random_list(0, 100, coefficient)
-        size_list = len(list_num) - 1
-        result = ''
+        list_num: list[int] = create_random_list(0, 100, coefficient)
+        size_list: int = len(list_num) - 1
+        result: str = ""
         for i in list_num:
-            tmp = str(i) if 1 != i != 0 else ""
+            tmp: str = str(i) if 1 != i != 0 else ""
             if size_list > 1:
                 result += f"{tmp}x**{size_list} + "
             elif size_list == 1:
@@ -90,10 +92,8 @@ def exercise103() -> None:
         result += " = 0"
         return result
 
-    coefficient_one = get_positive_numeric_from_console(
-        "Input coefficient for file one: ")
-    coefficient_two = get_positive_numeric_from_console(
-        "Input coefficient for file two: ")
+    coefficient_one: int = get_positive_numeric_from_console("Input coefficient for file one: ")
+    coefficient_two: int = get_positive_numeric_from_console("Input coefficient for file two: ")
 
     write_file("104_file1.txt", make_formula(coefficient_one))
     write_file("104_file2.txt", make_formula(coefficient_two))
@@ -104,11 +104,11 @@ def exercise103() -> None:
 def exercise104() -> None:
     def fun_to_dict(file: str) -> dict:
         with open(file, 'r') as file:
-            poly = file.readline()
-            poly_replaced = poly.replace(" ", "").replace(
+            poly: str = file.readline()
+            poly_replaced: list[str] = poly.replace(" ", "").replace(
                 "=0", "").replace("\n", "").split("+")
 
-        res_dict = {}
+        res_dict: dict = {}
         for i in poly_replaced:
             if "x**" in i:
                 res_dict[i[i.find("x") + 3]] = i[:i.find("*") - 1]
@@ -118,19 +118,19 @@ def exercise104() -> None:
                 res_dict[0] = i
         return res_dict
 
-    dic_one = fun_to_dict('104_file1.txt')
-    dic_two = fun_to_dict('104_file2.txt')
-    res = ""
+    dic_one: dict = fun_to_dict('104_file1.txt')
+    dic_two: dict = fun_to_dict('104_file2.txt')
+    res: str = ""
     for key in dic_one:
         try:
-            tmp = dic_two[key]
+            tmp: str = dic_two[key]
         except IndexError as e:
             print(e)
-            tmp = "0"
+            tmp: str = "0"
 
-        summa = int(dic_one[key]) - int(tmp)
-        deg = f"x**{key}" if int(key) >= 2 else "x" if int(key) == 1 else ""
-        plus_or_minus = " + " if summa >= 0 else " - "
+        summa: int = int(dic_one[key]) - int(tmp)
+        deg: str = f"x**{key}" if int(key) >= 2 else "x" if int(key) == 1 else ""
+        plus_or_minus: str = " + " if summa >= 0 else " - "
         summa = summa if summa > 0 else summa * -1
         res += f"{plus_or_minus}{summa}{deg}"
 
@@ -141,59 +141,72 @@ def exercise104() -> None:
 
 
 def exercise105() -> None:
-    print([res for res in input("Input letters separate with space: ")
-          .split() if "абв" not in res])
+    print([res for res in input("Input letters separate with space: ").split() if "абв" not in res])
     end_exercise()
 
 
 def exercise106() -> None:
-    max_take_candy = 28
+    max_take_candy: int = 28
     candy: int = 2021
+
     print(f"There {candy} candies")
-    is_player_one = True
-    level = 0
-    select_player = input("Input 1 or Yes for play with BOT: ").lower()
-    is_bot = True if (select_player == "yes" or select_player == "1") else False
+
+    is_player_one: bool = True
+    select_player: str = input("Input 1 or Yes for count_left_candies with BOT: ").lower()
+    is_bot: bool = True if (select_player == "yes" or select_player == "1") else False
+    level: int = 0
     if is_bot:
         while True:
-            level = get_positive_numeric_from_console("Select level (low - hard -> 0 -> 3: ")
+            level = get_positive_numeric_from_console("Select level (impossible -> low == 0 -> 3: ")
             if 0 <= level <= 3:
                 break
             else:
                 print("only number 0-3")
-        level *= 3
-    player_one = input("Input name first player: ")
-    player_two = "BOT" if is_bot else input("Input name second player: ")
+        level *= 2
+
+    player_one: str = input("Input name first player: ")
+    player_two: str = "BOT" if is_bot else input("Input name second player: ")
 
     def get_candy(player: str) -> int:
         while True:
             print("You need to take from 1 to 28 pcs")
-            pcs_candies = get_positive_numeric_from_console(f"Take candies ({player}): ")
+            pcs_candies: int = get_positive_numeric_from_console(f"Take candies ({player}): ")
             if 28 >= pcs_candies >= 1:
                 break
         return pcs_candies
 
-    def play(pcs: int, take_pcs: int) -> int:
-        pcs = pcs - take_pcs
-        return pcs
+    def count_left_candies(all_pcs: int, take_pcs: int) -> int:
+        all_pcs = all_pcs - take_pcs
+        return all_pcs
+
+    def get_bot_candy(can: int, lev: int) -> int:
+        bot_get_candies: int = (can % (max_take_candy + 1))
+        shift: int = randint(0, lev)
+        bot_get_candies += shift if bot_get_candies + shift < max_take_candy else -shift
+        return bot_get_candies
 
     while True:
-        message = f"Player {player_one}" if is_player_one else f"Player {player_two}"
+        message: str = f"Player {player_one}" if is_player_one else f"Player {player_two}"
+
         if candy > max_take_candy:
             print()
             if is_bot and not is_player_one:
-                rand = candy % max_take_candy + level + randint(0, level)
-                candies = play(candy, rand)
-                clear()
-                print(f"BOT takes {rand} candies")
+                take_bot_candies = get_bot_candy(candy, level)
+                candy = count_left_candies(candy, take_bot_candies)
+                print(f"BOT takes {take_bot_candies} candies")
             else:
-                candies = play(candy, get_candy(message))
-            print(f"there are {candies} candies left")
+                candy = count_left_candies(candy, get_candy(message))
+            print(f"there are {candy} candies left")
         else:
             print(message, "WIN")
             break
         is_player_one = not is_player_one
     end_exercise()
+
+
+def test() -> None:
+    li = sys.modules
+    print(*li, sep="\n")
 
 
 def exercise107() -> None:
@@ -208,8 +221,8 @@ def exercise108() -> None:
 
 def exercise_select() -> None:
     while True:
-        num = get_positive_numeric_from_console(
-            "input number exercise (101, 102, 103, 104, 105, 106, 107 or 108) or 0 to exit: ")
+        num = get_positive_numeric_from_console("input number exercise (101, 102, 103, 104, 105, 106, 107 or 108)"
+                                                " or 0 to exit: ")
         clear()
         if num == 101:
             exercise101()
@@ -227,6 +240,8 @@ def exercise_select() -> None:
             exercise107()
         elif num == 108:
             exercise108()
+        elif num == 1:
+            test()
         elif num == 0:
             break
         else:
