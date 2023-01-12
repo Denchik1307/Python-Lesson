@@ -2,12 +2,12 @@ import os
 from random import randint
 
 
-def EndExercise():
+def end_exercise():
     input("\npress enter to continue")
     os.system('cls')
 
 
-def GetNumericFromConsole(text=""):
+def get_numeric_from_console(text=""):
     res = -1
     while res < 0:
         try:
@@ -21,17 +21,17 @@ def GetNumericFromConsole(text=""):
     return res
 
 
-def CreateRandomList(min, max, size):
-    return [randint(min, max+1) for x in range(size)]
+def create_random_list(min_in_random, max_in_random, size):
+    return [randint(min_in_random, max_in_random + 1) for _ in range(size)]
 
 
-def GardenBed():
-    pcs = GetNumericFromConsole("Input pcs: ")
-    bushes = CreateRandomList(20, 50, pcs)
+def garden_bed():
+    pcs = get_numeric_from_console("Input pcs: ")
+    bushes = create_random_list(20, 50, pcs)
     print(bushes)
     res = 0
     index = 0
-    for i in range(3, len(bushes)+3):
+    for i in range(3, len(bushes) + 3):
         if len(bushes) < 3:
             print("not enough bushes ")
             break
@@ -40,15 +40,15 @@ def GardenBed():
         if tmp > res:
             res = tmp
             index = i
-    print("Maximum", res, "berries on bushs №", index-1, index, index+1)
-    EndExercise()
+    print("Maximum", res, "berries on bush`s №", index - 1, index, index + 1)
+    end_exercise()
 
 
-def GetDublicatesInLists():
-    sizeOne = GetNumericFromConsole("Input size list one (pcs): ")
-    sizeTwo = GetNumericFromConsole("Input size list two (pcs): ")
-    arr1: list[int] = CreateRandomList(0, 50, sizeOne)
-    arr2: list[int] = CreateRandomList(0, 50, sizeTwo)
+def get_duplicates_in_lists():
+    size_one = get_numeric_from_console("Input size list one (pcs): ")
+    size_two = get_numeric_from_console("Input size list two (pcs): ")
+    arr1: list[int] = create_random_list(0, 50, size_one)
+    arr2: list[int] = create_random_list(0, 50, size_two)
     print(sorted(arr1))
     print(sorted(arr2))
     res = []
@@ -57,22 +57,22 @@ def GetDublicatesInLists():
             res.append(item)
     if len(res) == 0:
         res.append("nothing")
-    print("Dubicates numbers -> ", sorted(res))
-    EndExercise()
+    print("Duplicates numbers -> ", sorted(res))
+    end_exercise()
 
 
-def ExserciseSelect():
+def exercise_select():
     while True:
-        num = GetNumericFromConsole(
+        num = get_numeric_from_console(
             "input number exercise (22 or 24) or 0 to exit: ")
         if num == 22:
-            GetDublicatesInLists()
+            get_duplicates_in_lists()
         elif num == 24:
-            GardenBed()
+            garden_bed()
         elif num == 0:
             break
         else:
             print("input error")
 
 
-ExserciseSelect()
+exercise_select()
