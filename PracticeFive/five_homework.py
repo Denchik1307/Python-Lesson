@@ -29,16 +29,16 @@ def exercise_28():
     first_num = get_positive_num_from_console("Input first number: ")
     second_num = get_positive_num_from_console("Input second number: ")
 
-    def my_summ(a: int, b: int):
+    def my_summa(a: int, b: int):
 
         if b == 0:
             return a
         else:
             # b -= 1
             # a += 1
-            return my_summ(a + 1, b - 1)
+            return my_summa(a + 1, b - 1)
 
-    print(my_summ(first_num, second_num))
+    print(my_summa(first_num, second_num))
 
 
 def exercise_select():
