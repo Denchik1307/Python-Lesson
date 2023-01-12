@@ -17,6 +17,8 @@ def exercise_26():
     second_num = get_positive_num_from_console("Input pow: ")
 
     def my_pow(a: int, b: int):
+        if b == 0:
+            return 1
         if b == 1:
             return a
         else:
