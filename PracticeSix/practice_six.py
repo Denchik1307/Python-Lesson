@@ -4,29 +4,26 @@ def get_positive_int_from_console(text):
             res = int(input(text))
             if res > -1:
                 break
-        except:
+        except ValueError:
             print("only number")
     return res
 
 
-def file_open():
+def file_open() -> list[str]:
     res = []
     with open("phonebook.txt", "r", encoding="utf8") as file:
         res = file.read().strip().split("\n")
     return res
 
 
-def write_file(contacts):
+def write_file(contacts) -> None:
     contacts = f"{','.join(contacts)}'\n'"
     with open("phonebook.txt", "a", encoding="utf8") as datafile:
-        try:
-            datafile.write(contacts)
-            print("write success!")
-        except:
-            print("write error!!!")
+        datafile.write(contacts)
 
 
-def show_contact(contacts):
+
+def show_contact(contacts) -> None:
     list_contacts = contacts.split(",")
     temp = f"""
 First:{list_contacts[0]}
@@ -36,13 +33,13 @@ Phone:{list_contacts[3]}"""
     print(temp)
 
 
-def show_all_contacts():
+def show_all_contacts() -> None:
     file = file_open()
     for contact in file:
         show_contact(contact)
 
 
-def search_contact():
+def search_contact() -> None:
     while True:
         search = input("""
 Press Enter for search or input 1 for Exit 
