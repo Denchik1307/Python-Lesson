@@ -1,4 +1,4 @@
-def get_positive_int_from_console(text):
+def get_positive_int_from_console(text) -> int:
     while True:
         try:
             res = int(input(text))
@@ -20,7 +20,6 @@ def write_file(contacts) -> None:
     contacts = f"{','.join(contacts)}'\n'"
     with open("phonebook.txt", "a", encoding="utf8") as datafile:
         datafile.write(contacts)
-
 
 
 def show_contact(contacts) -> None:
@@ -55,7 +54,7 @@ Input for search: """)
             show_contact(contact)
 
 
-def add_contact():
+def add_contact() -> None:
     while True:
         input("""
 For exit press Enter
@@ -78,7 +77,7 @@ def change_number():
     pass
 
 
-def selection():
+def selection() -> None:
     while True:
         print("""
 1 - Show all contacts
