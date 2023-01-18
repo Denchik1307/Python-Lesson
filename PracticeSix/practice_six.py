@@ -28,12 +28,12 @@ def write_file(contacts):
 
 def show_contact(contacts):
     list_contacts = contacts.split(",")
-    template = f"""
+    temp = f"""
 First:{list_contacts[0]}
 Last:{list_contacts[1]}
 Middle:{list_contacts[2]}
 Phone:{list_contacts[3]}"""
-    print(template)
+    print(temp)
 
 
 def show_all_contacts():
