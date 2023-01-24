@@ -37,7 +37,7 @@ def get_res(input_list):
         input_list.pop(0)
     while "*" in input_list or "/" in input_list:
         for i in range(0, len(input_list) - 2, 2):
-            # if len(input_list)-2 <= i: break
+            if len(input_list)-2 <= i: break
             if input_list[i + 1] in "*/":
                 input_list[i] = str(calculate(input_list[i], input_list[i + 2], input_list[i + 1]))
                 input_list.pop(i + 1)
@@ -70,7 +70,7 @@ def remove_other(input_for_remove):
     return get_res(input_for_remove)
 
 
-n = "-22+300-(-14-5*5)/2"
+n = "-22+300-((-14-5)*5)/2 +5"
 example = n.replace(" ", "")
 prepare = preparation(example)
 print(remove_other(prepare))
