@@ -11,6 +11,8 @@ def calculate(a, b, sign):
             res = str(a * b)
         case "/":
             res = str(a / b)
+        case "^":
+            res = str(a ** b)
     return res
 
 
@@ -23,7 +25,7 @@ def preparation(example_input):
         else:
             list_example.append(tmp)
             tmp = ""
-        if i in "()+-/*":
+        if i in "()+-/*^":
             list_example.append(i)
     list_example.append(tmp)
     while "" in list_example:
@@ -37,12 +39,18 @@ def get_res(input_list):
         input_list.pop(0)
     while "*" in input_list or "/" in input_list:
         for i in range(0, len(input_list) - 2, 2):
-            if len(input_list)-2 <= i: break
+            if len(input_list) - 2 <= i:
+                break
             if input_list[i + 1] in "*/":
                 input_list[i] = str(calculate(input_list[i], input_list[i + 2], input_list[i + 1]))
                 input_list.pop(i + 1)
                 input_list.pop(i + 1)
-    while "+" in input_list or "-" in input_list:
+    while "^" in input_list:
+        index = input_list.index("^")
+        input_list[index - 1] = str(calculate(input_list[index - 1], input_list[index + 1], input_list[index]))
+        input_list.pop(index)
+        input_list.pop(index)
+    while "+" in input_list or "-" in input_list or "^" in input_list:
         input_list[0] = str(calculate(input_list[0], input_list[2], input_list[1]))
         input_list.pop(1)
         input_list.pop(1)
@@ -70,7 +78,7 @@ def remove_other(input_for_remove):
     return get_res(input_for_remove)
 
 
-n = "-22+300-((-14-5)*5)/2 +5"
+n = "-22+300-((-14-5)*5)/2 +(5/2)+5^3"
 example = n.replace(" ", "")
 prepare = preparation(example)
 print(remove_other(prepare))
