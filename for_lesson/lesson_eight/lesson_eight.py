@@ -53,7 +53,7 @@ def get_res(input_list):
 def remove_other(input_for_remove):
     while "(" in input_for_remove:
         first = len(input_for_remove) - 1 - input_for_remove[::-1].index("(")
-        second = input_for_remove.index(")")
+        second = input_for_remove[first:].index(")") + first
         start = input_for_remove[: first]
         end = input_for_remove[second + 1:]
         tmp = input_for_remove[first + 1: second]
