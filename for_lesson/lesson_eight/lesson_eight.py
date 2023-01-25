@@ -1,24 +1,29 @@
-def calculate(a, b, sign):
-    a = float(a)
-    b = float(b)
-    res = ""
-    match sign:
-        case "+":
-            res = str(a + b)
-        case "-":
-            res = str(a - b)
-        case "*":
-            res = str(a * b)
-        case "/":
-            res = str(a / b)
-        case "^":
-            res = str(a ** b)
-    return res
+def calculate(a: str, b: str, sign: str) -> str:
+    try:
+        a: float = float(a)
+        b: float = float(b)
+        res: float = 0.0
+        match sign:
+            case "+":
+                res = a + b
+            case "-":
+                res = a - b
+            case "*":
+                res = a * b
+            case "/":
+                res = a / b
+            case "^":
+                res = a ** b
+        return str(res)
+    except ValueError:
+        return "wrong input (maby + - * / )"
 
 
-def preparation(example_input):
-    list_example = []
-    tmp = ""
+def preparation(example_input: str) -> list[str]:
+    if len(example_input) == 0:
+        return ["empty input"]
+    list_example: list = []
+    tmp: str = ""
     for i in example_input:
         if i.isdigit():
             tmp += i
@@ -33,13 +38,13 @@ def preparation(example_input):
     return list_example
 
 
-def get_res(input_list):
+def get_res(input_list: list[str]) -> list[str]:
     if input_list[0] == "-":
         input_list[1] = str(-int(input_list[1]))
         input_list.pop(0)
     while "^" in input_list:
         index = input_list.index("^")
-        input_list[index - 1] = str(calculate(input_list[index - 1], input_list[index + 1], input_list[index]))
+        input_list[index - 1] = (calculate(input_list[index - 1], input_list[index + 1], input_list[index]))
         input_list.pop(index)
         input_list.pop(index)
     while "*" in input_list or "/" in input_list:
@@ -51,24 +56,29 @@ def get_res(input_list):
                 input_list.pop(i + 1)
                 input_list.pop(i + 1)
     while "+" in input_list or "-" in input_list:
-        input_list[0] = str(calculate(input_list[0], input_list[2], input_list[1]))
+        input_list[0] = (calculate(input_list[0], input_list[2], input_list[1]))
         input_list.pop(1)
         input_list.pop(1)
 
     return input_list
 
 
-def remove_other(input_for_remove):
+def remove_other(input_for_remove: list[str] | str) -> list[str]:
     while "(" in input_for_remove:
-        first = len(input_for_remove) - 1 - input_for_remove[::-1].index("(")
-        second = input_for_remove[first:].index(")") + first
-        start = input_for_remove[: first]
-        end = input_for_remove[second + 1:]
-        tmp = input_for_remove[first + 1: second]
+        if isinstance(input_for_remove, str):
+            return [input_for_remove]
+        try:
+            first: int = len(input_for_remove) - 1 - input_for_remove[::-1].index("(")
+            second: int = input_for_remove[first:].index(")") + first
+        except ValueError:
+            return ["'(' or ')' not found"]
+        start: list = input_for_remove[: first]
+        end: list = input_for_remove[second + 1:]
+        tmp: list = input_for_remove[first + 1: second]
         if tmp[0] == "-":
             tmp[1] = str(-int(tmp[1]))
             tmp.pop(0)
-        xxx = get_res(tmp)
+        xxx: list[str] = get_res(tmp)
 
         input_for_remove.clear()
         input_for_remove.extend(start)
@@ -78,7 +88,9 @@ def remove_other(input_for_remove):
     return get_res(input_for_remove)
 
 
-n = "-22+300-((-14-5)*5)/2 +(5/2)+5^3"
+n = "-22+300-((-   14 -5) *5)^2   /2 +5/(2+5)^3"
+# n = "(-2^2+3^    2"
+# n = "2+3++3"
 example = n.replace(" ", "")
 prepare = preparation(example)
-print(remove_other(prepare))
+print(remove_other(prepare)[0])
