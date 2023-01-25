@@ -37,6 +37,11 @@ def get_res(input_list):
     if input_list[0] == "-":
         input_list[1] = str(-int(input_list[1]))
         input_list.pop(0)
+    while "^" in input_list:
+        index = input_list.index("^")
+        input_list[index - 1] = str(calculate(input_list[index - 1], input_list[index + 1], input_list[index]))
+        input_list.pop(index)
+        input_list.pop(index)
     while "*" in input_list or "/" in input_list:
         for i in range(0, len(input_list) - 2, 2):
             if len(input_list) - 2 <= i:
@@ -45,11 +50,6 @@ def get_res(input_list):
                 input_list[i] = str(calculate(input_list[i], input_list[i + 2], input_list[i + 1]))
                 input_list.pop(i + 1)
                 input_list.pop(i + 1)
-    while "^" in input_list:
-        index = input_list.index("^")
-        input_list[index - 1] = str(calculate(input_list[index - 1], input_list[index + 1], input_list[index]))
-        input_list.pop(index)
-        input_list.pop(index)
     while "+" in input_list or "-" in input_list or "^" in input_list:
         input_list[0] = str(calculate(input_list[0], input_list[2], input_list[1]))
         input_list.pop(1)
