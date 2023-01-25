@@ -15,6 +15,8 @@ def calculate(a: str, b: str, sign: str) -> str:
             case "^":
                 res = a ** b
         return str(res)
+    except ZeroDivisionError:
+        return "find division zero"
     except ValueError:
         return "wrong input (maby + - * / )"
 
@@ -88,9 +90,9 @@ def remove_other(input_for_remove: list[str] | str) -> list[str]:
     return get_res(input_for_remove)
 
 
-n = "-22+300-((-   14 -5) *5)^2   /2 +5/(2+5)^3"
-# n = "(-2^2+3^    2"
-# n = "2+3++3"
-example = n.replace(" ", "")
-prepare = preparation(example)
-print(remove_other(prepare)[0])
+n = ["( 10 - 5 ) * ( 2 + 3 )^2 - 1 + ( 4 * ( 20 - 20 / ( 5 - 1 ))) * ( 2 + 7 )"]
+for x in n:
+    example = x.replace(" ", "")
+    prepare = preparation(example)
+    print(example, "=", eval(x.replace("^", "**")), "eval")
+    print(example, "=", remove_other(prepare)[0], "my")
