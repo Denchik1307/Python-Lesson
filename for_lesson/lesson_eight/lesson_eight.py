@@ -26,6 +26,7 @@ def preparation(example_input: str) -> list[str]:
         return ["empty input"]
     list_example: list = []
     tmp: str = ""
+    sign = ""
     for i in example_input:
         if i.isdigit():
             tmp += i
@@ -33,7 +34,7 @@ def preparation(example_input: str) -> list[str]:
             list_example.append(tmp)
             tmp = ""
         if i in "()+-/*^":
-            list_example.append(i)
+            list_example.append(sign + i)
     list_example.append(tmp)
     while "" in list_example:
         list_example.remove("")
@@ -41,7 +42,7 @@ def preparation(example_input: str) -> list[str]:
 
 
 def get_res(input_list: list[str]) -> list[str]:
-    if input_list[0] == "-":
+    if input_list[0] in "-+":
         input_list[1] = str(-int(input_list[1]))
         input_list.pop(0)
     while "^" in input_list:
@@ -53,6 +54,9 @@ def get_res(input_list: list[str]) -> list[str]:
         for i in range(0, len(input_list) - 2, 2):
             if len(input_list) - 2 <= i:
                 break
+            if input_list[i + 2] == "-":
+                input_list[i + 2] = "-" + input_list[i + 3]
+                input_list.pop(i + 3)
             if input_list[i + 1] in "*/":
                 input_list[i] = str(calculate(input_list[i], input_list[i + 2], input_list[i + 1]))
                 input_list.pop(i + 1)
@@ -80,8 +84,8 @@ def remove_other(input_for_remove: list[str] | str) -> list[str]:
         if tmp[0] == "-":
             tmp[1] = str(-int(tmp[1]))
             tmp.pop(0)
-        xxx: list[str] = get_res(tmp)
 
+        xxx = get_res(tmp)
         input_for_remove.clear()
         input_for_remove.extend(start)
         input_for_remove.extend(xxx)
@@ -90,7 +94,8 @@ def remove_other(input_for_remove: list[str] | str) -> list[str]:
     return get_res(input_for_remove)
 
 
-n = ["( 10 - 5 ) * ( 2 + 3 )^2 - 1 + ( 4 * ( 20 - 20 / ( 5 - 1 ))) * ( 2 + 7 )"]
+#
+n = ["( 10 - 5 ) * ( 2 + 3 )^2 - 1 + ( 4 * ( 20 - 20 / ( 5 - 1 ))) * ( 2 + 7 )","(( 10 - 5 ) *2 + 3^(3 - 1))/-4"]
 for x in n:
     example = x.replace(" ", "")
     prepare = preparation(example)
