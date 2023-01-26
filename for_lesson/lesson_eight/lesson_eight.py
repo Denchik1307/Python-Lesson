@@ -93,9 +93,31 @@ def remove_other(input_for_remove: list[str] | str) -> list[str]:
     return get_res(input_for_remove)
 
 
-# n = ["( 10 - 5 ) * ( 2 + 3 )^2 - 1 + ( 4 * ( 20 - 20 / ( 5 - 1 ))) * ( 2 + 7 )","(( 10 - 5 ) *2 + 3^(3 - 1))/-4"]
+# n = ["( 10 - 5 ) * ( 2 + 3 )^2 - 1 + ( 4 * ( 20 - 20 / ( 5 - 1 ))) * ( 2 + 7 )"]
 # for x in n:
 #     example = x.replace(" ", "")
 #     prepare = preparation(example)
 #     print(example, "=", eval(x.replace("^", "**")), "eval")
 #     print(example, "=", remove_other(prepare)[0], "my")
+
+def hz():
+    example = win_entry.get()
+    # print(example)
+    example = example.replace(" ", "")
+    prepare = preparation(example)
+    win_label.configure(text=str(remove_other(prepare)[0]))
+
+
+root = CTk()
+root.title("Calculator")
+root.geometry("500x200+600+200")
+root.resizable(False, False)
+
+win_entry = CTkEntry(root, width=500)
+win_entry.grid(row=0, column=0)
+win_button = CTkButton(root, width=350, height=25, text="Calculate", command=hz)
+win_button.grid(row=1, column=0)
+win_label = CTkLabel(root, height=150, width=500, font=("Arial", 20, "bold"))
+win_label.grid(row=2, column=0)
+
+root.mainloop()
