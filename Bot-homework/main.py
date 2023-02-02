@@ -1,4 +1,6 @@
 from bot_commands import *
+# import os
+# os.system("pip -V")
 
 app = ApplicationBuilder().token("5883830490:AAFrWHdmwn7FcVkAaXB1mQCcEjcJjbuEQEE").build()
 

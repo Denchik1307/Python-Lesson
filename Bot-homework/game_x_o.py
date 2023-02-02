@@ -22,23 +22,25 @@ def show_matrix():
 def check_win():
     global matrix
     if matrix[0] == matrix[1] == matrix[2] or matrix[0] == matrix[3] == matrix[6]:
-        return f'Winner {matrix[0]}'
+        return f'Winner {matrix[0]}\n'
     elif matrix[0] == matrix[4] == matrix[8] \
             or matrix[1] == matrix[4] == matrix[7] \
             or matrix[2] == matrix[4] == matrix[6] \
             or matrix[3] == matrix[4] == matrix[5]:
-        return f'Winner {matrix[8]}'
+        return f'Winner {matrix[8]}\n'
     elif matrix[6] == matrix[7] == matrix[8]:
-        return f'Winner {matrix[8]}'
+        return f'Winner {matrix[8]}\n'
     else:
         return -1
 
 
 def player(number):
     global matrix
+    # print(matrix, " user before")
     index = int(number) - 1
-    if (matrix[index] != 'X') and (matrix[index - 1] != 'O'):
+    if (matrix[index] != 'X') and (matrix[index] != 'O'):
         matrix[index] = 'X'
+        # print(matrix, " user after")
         return 1
     else:
         return 0
@@ -46,13 +48,17 @@ def player(number):
 
 def comp():
     global matrix
-    i = 1
+    # print(matrix, " bot before")
+    index = 0
     # for i in range(0, len(input_matrix)):
-    while (matrix[i] != 'X') and (matrix[i] != 'O'):
-        i = random.randint(0, 8)
-        if (matrix[i] != 'X') and (matrix[i] != 'O'):
-            matrix[i] = 'O'
-    return f"\nI move to {i + 1}\n"
+    while True:
+        index += 1
+        if (matrix[index] != 'X') and (matrix[index] != 'O'):
+            matrix[index] = 'O'
+            # print(matrix, " bot after")
+            if index >= len(matrix):
+                return ""
+            return f"\nI move to {index + 1}\n"
 
 
 def check_end_game():
@@ -74,8 +80,12 @@ def start_game(msg):
             temp += comp()
         else:
             temp = "Wrong cell\n"
-    if win := check_win() == 1:
-        temp += win
+    if (win := check_win()) != -1:
+        temp = win
+        is_first = True
+        temp += show_matrix()
+        first_move()
+        temp += "\n\nNew game\n"
     temp += show_matrix()
     return temp
     # if is_wrong == 0:

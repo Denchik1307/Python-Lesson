@@ -19,7 +19,7 @@ async def time_to_new_year_command(update: Update, context: ContextTypes.DEFAULT
     await update.message.reply_text(
         text=f'To {str(datetime.today().year + 1)} stay:\n'
              f'{str(remained.days)} days\n'
-             f'{str(remained.months)} momts\n'
+             f'{str(remained.months)} months\n'
              f'{str(remained.hours)} hours\n'
              f'{str(remained.minutes)} minutes\n'
              f'{str(remained.seconds)} seconds')
@@ -50,6 +50,5 @@ async def selector(update: Update, context: ContextTypes.DEFAULT_TYPE):
         await update.message.reply_text(text="input for calculate or 'exit' for close calculator")
     if _state_message_handler == "game_x_o":
         await update.message.reply_text(game_x_o.start_game(update.message.text))
-        if game_x_o.is_first:
-            _state_message_handler = ""
-            await update.message.reply_text(text="Bye )")
+    elif not game_x_o.is_first:
+        game_x_o.is_first = True
