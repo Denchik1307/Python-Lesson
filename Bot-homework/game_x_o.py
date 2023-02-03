@@ -1,7 +1,9 @@
-import random
+from texttable import Texttable
 
 matrix = [1, 2, 3, 4, 5, 6, 7, 8, 9]
 is_first = True
+
+_x_cell = "x"
 
 
 def first_move():
@@ -12,11 +14,12 @@ def first_move():
 
 def show_matrix():
     global matrix
-    return f'{matrix[0]} | {matrix[1]} | {matrix[2]}' \
-           f'\n—  —  —' \
-           f'\n{matrix[3]} | {matrix[4]} | {matrix[5]}' \
-           f'\n—  —  —' \
-           f'\n{matrix[6]} | {matrix[7]} | {matrix[8]}'
+    place = Texttable()
+    place.add_row([matrix[0], matrix[1], matrix[2]])
+    place.add_row([matrix[3], matrix[4], matrix[5]])
+    place.add_row([matrix[6], matrix[7], matrix[8]])
+    # print(place)
+    return place.draw()
 
 
 def check_win():
@@ -38,8 +41,8 @@ def player(number):
     global matrix
     # print(matrix, " user before")
     index = int(number) - 1
-    if (matrix[index] != 'X') and (matrix[index] != 'O'):
-        matrix[index] = 'X'
+    if (matrix[index] != _x_cell) and (matrix[index] != _x_cell):
+        matrix[index] = _x_cell
         # print(matrix, " user after")
         return 1
     else:
@@ -53,18 +56,19 @@ def comp():
     # for i in range(0, len(input_matrix)):
     while True:
         index += 1
-        if (matrix[index] != 'X') and (matrix[index] != 'O'):
-            matrix[index] = 'O'
+        if index >= len(matrix):
+            return ""
+        if (matrix[index] != _x_cell) and (matrix[index] != 'o'):
+            matrix[index] = 'o'
             # print(matrix, " bot after")
-            if index >= len(matrix):
-                return ""
+
             return f"\nI move to {index + 1}\n"
 
 
 def check_end_game():
     global matrix
     for i in matrix:
-        if i != "X" or i != "O":
+        if i != "x" or i != "o":
             return -1
         else:
             return 1

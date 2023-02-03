@@ -4,6 +4,7 @@ from datetime import datetime
 from dateutil.relativedelta import relativedelta
 import game_x_o
 from my_calc import calculator
+import weather
 
 _state_message_handler = ""
 
@@ -11,6 +12,9 @@ _state_message_handler = ""
 async def hello_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     await update.message.reply_text(f'It`s you HAMLO {update.effective_user.first_name} :-)')
 
+
+async def weather_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
+    await update.message.reply_text(weather.get_weather(update.message.text.split()[1]))
 
 async def time_to_new_year_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     date_now = datetime.today()
