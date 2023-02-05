@@ -10,13 +10,20 @@ _state_message_handler = ""
 
 
 async def hello_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
+    global _state_message_handler
+    _state_message_handler = ""
     await update.message.reply_text(f'It`s you HAMLO {update.effective_user.first_name} :-)')
 
 
 async def weather_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
+    global _state_message_handler
+    _state_message_handler = "weather"
     await update.message.reply_text(weather.get_weather(update.message.text.split()[1]))
 
+
 async def time_to_new_year_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
+    global _state_message_handler
+    _state_message_handler = ""
     date_now = datetime.today()
     date_new_year = datetime(date_now.year + 1, 1, 1, 0, 0, 0)
     remained = relativedelta(date_new_year, date_now)
