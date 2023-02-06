@@ -65,6 +65,7 @@ async def calc_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> No
 
 async def play_x_o_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     global _state_message_handler
+    game_x_o.first_move()
     _state_message_handler = "game_x_o"
     await update.message.reply_text(text=game_x_o.show_matrix())
 

@@ -1,9 +1,12 @@
+import random
+
 from texttable import Texttable
 
 matrix = [1, 2, 3, 4, 5, 6, 7, 8, 9]
 is_first = True
 
 _x_cell = "x"
+_o_cell = "o"
 
 
 def first_move():
@@ -25,14 +28,14 @@ def show_matrix():
 def check_win():
     global matrix
     if matrix[0] == matrix[1] == matrix[2] or matrix[0] == matrix[3] == matrix[6]:
-        return f'Winner {matrix[0]}\n'
+        return f'Winner "{matrix[0]}"\n'
     elif matrix[0] == matrix[4] == matrix[8] \
             or matrix[1] == matrix[4] == matrix[7] \
             or matrix[2] == matrix[4] == matrix[6] \
             or matrix[3] == matrix[4] == matrix[5]:
-        return f'Winner {matrix[8]}\n'
-    elif matrix[6] == matrix[7] == matrix[8]:
-        return f'Winner {matrix[8]}\n'
+        return f'Winner "{matrix[4]}"\n'
+    elif matrix[6] == matrix[7] == matrix[8] or matrix[3] == matrix[5] == matrix[8]:
+        return f'Winner "{matrix[8]}"\n'
     else:
         return -1
 
@@ -41,7 +44,7 @@ def player(number):
     global matrix
     # print(matrix, " user before")
     index = int(number) - 1
-    if (matrix[index] != _x_cell) and (matrix[index] != _x_cell):
+    if (matrix[index] != _x_cell) or (matrix[index] != _o_cell):
         matrix[index] = _x_cell
         # print(matrix, " user after")
         return 1
@@ -52,23 +55,24 @@ def player(number):
 def comp():
     global matrix
     # print(matrix, " bot before")
-    index = 0
+    dog_watch = 0
     # for i in range(0, len(input_matrix)):
     while True:
-        index += 1
-        if index >= len(matrix):
-            return ""
-        if (matrix[index] != _x_cell) and (matrix[index] != 'o'):
-            matrix[index] = 'o'
+        index = random.randint(0, 8)
+        if dog_watch > 30:
+            return "I can`t move\n"
+        if (matrix[index] != _x_cell) or (matrix[index] != _o_cell):
+            matrix[index] = _o_cell
             # print(matrix, " bot after")
 
             return f"\nI move to {index + 1}\n"
+        dog_watch += 1
 
 
 def check_end_game():
     global matrix
     for i in matrix:
-        if i != "x" or i != "o":
+        if i != _x_cell or i != _o_cell:
             return -1
         else:
             return 1
@@ -84,6 +88,8 @@ def start_game(msg):
             temp += comp()
         else:
             temp = "Wrong cell\n"
+    else:
+        temp = "Wrong input\n"
     if (win := check_win()) != -1:
         temp = win
         is_first = True
