@@ -9,6 +9,7 @@ app = ApplicationBuilder().token("5883830490:AAFrWHdmwn7FcVkAaXB1mQCcEjcJjbuEQEE
 
 
 app.add_handler(CommandHandler(command="hello", callback=hello_command))
+app.add_handler(CommandHandler(command="english_world", callback=eng_world_command))
 app.add_handler(CommandHandler(command="help", callback=help_command))
 app.add_handler(CommandHandler(command="time2ny", callback=time_to_new_year_command))
 app.add_handler(CommandHandler(command="calculate", callback=calc_command))
