@@ -13,7 +13,7 @@ def get_weather(city: str):
         return make_result(data)
     except Exception as err:
         print(err)
-        return f"Can`t find this city \"{city}\" 🤔"
+        return f"I can`t find this city \"{city}\" 🤔"
 
 
 def calc_direction(direction_deg):
@@ -40,9 +40,11 @@ def calc_direction(direction_deg):
 def make_result(in_data):
     direction_deg = in_data['wind']['deg']
     direction = calc_direction(direction_deg)
+    print(in_data)
     return f"In {in_data['name']}:\n" \
-           f"Pressure -> {in_data['main']['pressure']} Kpa\n" \
-           f"Temperature -> {in_data['main']['temp']} °С\n" \
+           f"Pressure -> {in_data['main']['pressure']} мм.рт. ст\n" \
+           f"Temperature -> {in_data['main']['temp']}°С " \
+           f"({in_data['main']['temp_max']}↑;{in_data['main']['temp_min']}↓) \n" \
            f"Humidity -> {in_data['main']['humidity']} %\n" \
            f"Wind -> {in_data['wind']['speed']} m/s\n" \
            f"Direction -> {direction} \n"
