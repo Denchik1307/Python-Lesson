@@ -24,7 +24,7 @@ _help = "/help - helper use commands\n" \
 async def hello_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     global _state_message_handler
     _state_message_handler = ""
-    await update.message.reply_text(f'It`s you HAMLO {update.effective_user.first_name} :-)')
+    await update.message.reply_text(f'It`s you HAMLO {update.effective_user.first_name} 😎')
 
 
 async def exit_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
@@ -65,8 +65,8 @@ async def time_to_new_year_command(update: Update, context: ContextTypes.DEFAULT
     remained = relativedelta(date_new_year, date_now)
     await update.message.reply_text(
         text=f'To {str(datetime.today().year + 1)} stay:\n'
-             f'{str(remained.days)} days\n'
              f'{str(remained.months)} months\n'
+             f'{str(remained.days)} days\n'
              f'{str(remained.hours)} hours\n'
              f'{str(remained.minutes)} minutes\n'
              f'{str(remained.seconds)} seconds')
