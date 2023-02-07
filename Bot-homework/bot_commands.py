@@ -6,12 +6,14 @@ import game_x_o
 from my_calc import calculator
 import weather
 import eng_lesson
+import joke
 
 _state_message_handler = ""
 
 _help = "/help - helper use commands\n" \
         "/hello - hello message\n" \
         "/eng_world - random world with translate\n" \
+        "/joke - random joke\n" \
         "/weather - weather for city\n" \
         "/time2ny - Stay to New Year\n" \
         "/calculate - calculator\n" \
@@ -35,6 +37,12 @@ async def eng_world_command(update: Update, context: ContextTypes.DEFAULT_TYPE) 
     global _state_message_handler
     _state_message_handler = ""
     await update.message.reply_text(eng_lesson.get_world_random())
+
+
+async def joke_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
+    global _state_message_handler
+    _state_message_handler = ""
+    await update.message.reply_text(joke.rand_joke())
 
 
 async def help_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
