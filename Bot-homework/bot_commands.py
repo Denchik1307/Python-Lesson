@@ -88,16 +88,20 @@ async def play_x_o_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -
 
 async def selector(update: Update, context: ContextTypes.DEFAULT_TYPE):
     global _state_message_handler
-    if update.message.text == "exit":
-        await exit_command()
-    # await update.message.reply_text(text=_state_message_handler)
-    if _state_message_handler == "calc":
-        res = calculator(update.message.text)
-        await update.message.reply_text(text=f"{update.message.text}={res}")
-        await update.message.reply_text(text="input for calculate or 'exit' for close calculator")
-    if _state_message_handler == "game_x_o":
-        await update.message.reply_text(game_x_o.start_game(update.message.text))
-    elif not game_x_o.is_first:
-        game_x_o.is_first = True
-    if _state_message_handler == "weather":
-        await update.message.reply_text(weather.get_weather(update.message.text))
+    print(True if update.message.text else False)
+    print(True if update.message.voice else False)
+    print(True if update.message.audio else False)
+    if update.message.text:
+        if update.message.text == "exit":
+            await exit_command()
+        # await update.message.reply_text(text=_state_message_handler)
+        if _state_message_handler == "calc":
+            res = calculator(update.message.text)
+            await update.message.reply_text(text=f"{update.message.text}={res}")
+            await update.message.reply_text(text="input for calculate or 'exit' for close calculator")
+        if _state_message_handler == "game_x_o":
+            await update.message.reply_text(game_x_o.start_game(update.message.text))
+        elif not game_x_o.is_first:
+            game_x_o.is_first = True
+        if _state_message_handler == "weather":
+            await update.message.reply_text(weather.get_weather(update.message.text))

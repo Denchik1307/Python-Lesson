@@ -41,10 +41,16 @@ def make_result(in_data):
     direction_deg = in_data['wind']['deg']
     direction = calc_direction(direction_deg)
     print(in_data)
-    return f"In {in_data['name']}:\n" \
+    lon = in_data['coord']['lon']
+    lat = in_data['coord']['lat']
+    return f"Weather in {in_data['name']}:\n" \
            f"Pressure -> {in_data['main']['pressure']} мм.рт. ст\n" \
            f"Temperature -> {in_data['main']['temp']}°С " \
-           f"({in_data['main']['temp_max']}↑;{in_data['main']['temp_min']}↓) \n" \
+           f"({in_data['main']['temp_max']}↑ | {in_data['main']['temp_min']}↓) \n" \
            f"Humidity -> {in_data['main']['humidity']} %\n" \
            f"Wind -> {in_data['wind']['speed']} m/s\n" \
-           f"Direction -> {direction} \n"
+           f"Direction -> {direction} \n" \
+           f"\nLocation on map:\n" \
+           f"Longitude {lon}\n" \
+           f"Latitude {lat}\n" \
+           f"https://yandex.by/maps/?ll={lon}%2C{lat}&z=14"

@@ -17,7 +17,9 @@ app.add_handler(CommandHandler(command="play_x_o", callback=play_x_o_command))
 app.add_handler(CommandHandler(command="weather", callback=weather_command))
 app.add_handler(CommandHandler(command="exit", callback=exit_command))
 
-app.add_handler(MessageHandler(filters=filters.USER, callback=selector))
+my_filters = [filters.USER, filters.VOICE]
+for my_filter in my_filters:
+    app.add_handler(MessageHandler(filters=my_filter, callback=selector))
 
 print("Server start")
 app.run_polling()
