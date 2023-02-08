@@ -76,7 +76,6 @@ async def calc_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> No
     global _state_message_handler
     _state_message_handler = "calc"
     await update.message.reply_text(text="input for calculate or 'exit' for close calculator")
-    # await update.message.reply_text(text=update.message.text)
 
 
 async def play_x_o_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:

@@ -21,7 +21,6 @@ def show_matrix():
     place.add_row([matrix[0], matrix[1], matrix[2]])
     place.add_row([matrix[3], matrix[4], matrix[5]])
     place.add_row([matrix[6], matrix[7], matrix[8]])
-    # print(place)
     return place.draw()
 
 
@@ -42,11 +41,9 @@ def check_win():
 
 def player(number):
     global matrix
-    # print(matrix, " user before")
     index = int(number) - 1
     if (matrix[index] != _x_cell) or (matrix[index] != _o_cell):
         matrix[index] = _x_cell
-        # print(matrix, " user after")
         return 1
     else:
         return 0
@@ -54,17 +51,13 @@ def player(number):
 
 def comp():
     global matrix
-    # print(matrix, " bot before")
     dog_watch = 0
-    # for i in range(0, len(input_matrix)):
     while True:
         index = random.randint(0, 8)
         if dog_watch > 30:
             return "I can`t move\n"
         if (matrix[index] != _x_cell) or (matrix[index] != _o_cell):
             matrix[index] = _o_cell
-            # print(matrix, " bot after")
-
             return f"\nI move to {index + 1}\n"
         dog_watch += 1
 
@@ -98,18 +91,4 @@ def start_game(msg):
         temp += "\n\nNew game\n"
     temp += show_matrix()
     return temp
-    # if is_wrong == 0:
-    #     return show_matrix() + "\nYou cant take this cell"
-    # response_bot = comp()
-    # return response_bot + show_matrix() + "\nYour move"
 
-# print(show_matrix())
-# while True:
-#     print(player(int(input("><")))+1)
-#     print(show_matrix())
-#     if check_win() == 1:
-#         break
-#     print(comp())
-#     print(show_matrix())
-#     if check_win() == 1:
-#         break
