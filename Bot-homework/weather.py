@@ -25,30 +25,40 @@ def get_weather(city: str):
         return tmp
 
     def _make_result(in_data):
+
+        city_name = in_data['name']
+        pressure = in_data['main']['pressure']
+        temperature = in_data['main']['temp']
+        max_temperature = in_data['main']['temp_max']
+        min_temperature = in_data['main']['temp_min']
+        humidity = in_data['main']['humidity']
+        wind = in_data['wind']['speed']
         direction_deg = in_data['wind']['deg']
         direction = _calc_direction(direction_deg)
-        print(in_data)
+
         lon = in_data['coord']['lon']
         lat = in_data['coord']['lat']
-        return f"Weather in {in_data['name']}:\n" \
-               f"Pressure -> {in_data['main']['pressure']} мм.рт. ст\n" \
-               f"Temperature -> {in_data['main']['temp']}°С " \
-               f"({in_data['main']['temp_max']}↑ | {in_data['main']['temp_min']}↓) \n" \
-               f"Humidity -> {in_data['main']['humidity']} %\n" \
-               f"Wind -> {in_data['wind']['speed']} m/s\n" \
+        weather_ten_days = f"https://yandex.by/pogoda/details/10-day-weather?lat={lat}&lon={lon}&via=ms"
+
+        return f"Weather in {city_name}:\n" \
+               f"Pressure -> {pressure} мм.рт. ст\n" \
+               f"Temperature -> {temperature}°С " \
+               f"({max_temperature}↑ | {min_temperature}↓) \n" \
+               f"Humidity -> {humidity} %\n" \
+               f"Wind -> {wind} m/s\n" \
                f"Direction -> {direction} \n" \
                f"\nLocation on map:\n" \
                f"Longitude {lon}\n" \
                f"Latitude {lat}\n" \
-               f"https://yandex.by/pogoda/details/10-day-weather?lat={lat}&lon={lon}&via=ms"
+               f"{weather_ten_days}"
 
     params['q'] = city.lower().capitalize()
     print(params)
     try:
-        response = requests.get("https://api.openweathermap.org/data/2.5/weather",
-                                params=params)
+        response = requests.get("https://api.openweathermap.org/data/2.5/weather", params=params)
         data = response.json()
         return _make_result(data)
     except Exception as err:
         print(err)
         return f"I can`t find this city \"{city}\" 🤔"
+
