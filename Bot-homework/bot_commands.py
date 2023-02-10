@@ -87,9 +87,6 @@ async def play_x_o_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -
 
 async def selector(update: Update, context: ContextTypes.DEFAULT_TYPE):
     global _state_message_handler
-    print(True if update.message.text else False)
-    print(True if update.message.voice else False)
-    print(True if update.message.audio else False)
     if update.message.text:
         if update.message.text == "exit":
             await exit_command()
